@@ -1,0 +1,6 @@
+c:\users\дарья\documents\visual studio 2015\Projects\CloneVersionSystem\CloneVersionSystem\bin\Debug\CloneVersionSystem.exe.config
+c:\users\дарья\documents\visual studio 2015\Projects\CloneVersionSystem\CloneVersionSystem\bin\Debug\CloneVersionSystem.exe
+c:\users\дарья\documents\visual studio 2015\Projects\CloneVersionSystem\CloneVersionSystem\bin\Debug\CloneVersionSystem.pdb
+c:\users\дарья\documents\visual studio 2015\Projects\CloneVersionSystem\CloneVersionSystem\obj\Debug\CloneVersionSystem.exe
+c:\users\дарья\documents\visual studio 2015\Projects\CloneVersionSystem\CloneVersionSystem\obj\Debug\CloneVersionSystem.pdb
+c:\users\дарья\documents\visual studio 2015\Projects\CloneVersionSystem\CloneVersionSystem\obj\Debug\CloneVersionSystem.csprojResolveAssemblyReference.cache
