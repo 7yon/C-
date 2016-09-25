@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AreaTriangle", "TheAreaOfATriangle\AreaTriangle.csproj", "{D56EBCAD-A9F6-4485-ADE7-2D9E96AB0EE2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinderSides", "FinderSides\FinderSides.csproj", "{D4F7E8E6-88B1-4EFD-9922-057302C546CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinderSides.Tests", "FinderSides.Tests\FinderSides.Tests.csproj", "{06BBBF5F-A2B4-41A9-936A-27684503CD64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AreaTriangle.Tests", "AreaTriangle.Tests\AreaTriangle.Tests.csproj", "{7C1C13CD-6659-4275-9876-06FD42EB1F79}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D56EBCAD-A9F6-4485-ADE7-2D9E96AB0EE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D56EBCAD-A9F6-4485-ADE7-2D9E96AB0EE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D56EBCAD-A9F6-4485-ADE7-2D9E96AB0EE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D56EBCAD-A9F6-4485-ADE7-2D9E96AB0EE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4F7E8E6-88B1-4EFD-9922-057302C546CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4F7E8E6-88B1-4EFD-9922-057302C546CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4F7E8E6-88B1-4EFD-9922-057302C546CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4F7E8E6-88B1-4EFD-9922-057302C546CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06BBBF5F-A2B4-41A9-936A-27684503CD64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06BBBF5F-A2B4-41A9-936A-27684503CD64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06BBBF5F-A2B4-41A9-936A-27684503CD64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06BBBF5F-A2B4-41A9-936A-27684503CD64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C1C13CD-6659-4275-9876-06FD42EB1F79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C1C13CD-6659-4275-9876-06FD42EB1F79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C1C13CD-6659-4275-9876-06FD42EB1F79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C1C13CD-6659-4275-9876-06FD42EB1F79}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

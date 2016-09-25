@@ -1,0 +1,10 @@
+c:\users\дарья\documents\visual studio 2015\Projects\TheAreaOfATriangle\FinderSides\bin\Debug\FinderSides.dll
+c:\users\дарья\documents\visual studio 2015\Projects\TheAreaOfATriangle\FinderSides\bin\Debug\FinderSides.pdb
+c:\users\дарья\documents\visual studio 2015\Projects\TheAreaOfATriangle\FinderSides\obj\Debug\FinderSides.csprojResolveAssemblyReference.cache
+c:\users\дарья\documents\visual studio 2015\Projects\TheAreaOfATriangle\FinderSides\obj\Debug\FinderSides.dll
+c:\users\дарья\documents\visual studio 2015\Projects\TheAreaOfATriangle\FinderSides\obj\Debug\FinderSides.pdb
+D:\C_SharpCourse\TheAreaOfATriangle\FinderSides\bin\Debug\FinderSides.dll
+D:\C_SharpCourse\TheAreaOfATriangle\FinderSides\bin\Debug\FinderSides.pdb
+D:\C_SharpCourse\TheAreaOfATriangle\FinderSides\obj\Debug\FinderSides.csprojResolveAssemblyReference.cache
+D:\C_SharpCourse\TheAreaOfATriangle\FinderSides\obj\Debug\FinderSides.dll
+D:\C_SharpCourse\TheAreaOfATriangle\FinderSides\obj\Debug\FinderSides.pdb

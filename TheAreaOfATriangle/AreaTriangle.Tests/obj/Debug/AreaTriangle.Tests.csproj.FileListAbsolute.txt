@@ -1,0 +1,11 @@
+c:\users\дарья\documents\visual studio 2015\Projects\TheAreaOfATriangle\AreaTriangle.Tests\bin\Debug\AreaTriangle.Tests.dll
+c:\users\дарья\documents\visual studio 2015\Projects\TheAreaOfATriangle\AreaTriangle.Tests\bin\Debug\AreaTriangle.Tests.pdb
+c:\users\дарья\documents\visual studio 2015\Projects\TheAreaOfATriangle\AreaTriangle.Tests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+c:\users\дарья\documents\visual studio 2015\Projects\TheAreaOfATriangle\AreaTriangle.Tests\bin\Debug\TheAreaOfATriangle.exe
+c:\users\дарья\documents\visual studio 2015\Projects\TheAreaOfATriangle\AreaTriangle.Tests\bin\Debug\FinderSides.dll
+c:\users\дарья\documents\visual studio 2015\Projects\TheAreaOfATriangle\AreaTriangle.Tests\bin\Debug\TheAreaOfATriangle.pdb
+c:\users\дарья\documents\visual studio 2015\Projects\TheAreaOfATriangle\AreaTriangle.Tests\bin\Debug\FinderSides.pdb
+c:\users\дарья\documents\visual studio 2015\Projects\TheAreaOfATriangle\AreaTriangle.Tests\bin\Debug\ru\Microsoft.VisualStudio.QualityTools.UnitTestFramework.resources.dll
+c:\users\дарья\documents\visual studio 2015\Projects\TheAreaOfATriangle\AreaTriangle.Tests\obj\Debug\AreaTriangle.Tests.csprojResolveAssemblyReference.cache
+c:\users\дарья\documents\visual studio 2015\Projects\TheAreaOfATriangle\AreaTriangle.Tests\obj\Debug\AreaTriangle.Tests.dll
+c:\users\дарья\documents\visual studio 2015\Projects\TheAreaOfATriangle\AreaTriangle.Tests\obj\Debug\AreaTriangle.Tests.pdb
