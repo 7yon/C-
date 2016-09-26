@@ -14,41 +14,61 @@ namespace FinderSides
             {
                 return new double[] { sideA, sideB, sideC };
             }
-            else return new double[] { };
+            else
+            {
+                return new double[] { };
+            }
         }
         public static double[] FindSides(double sideA, double sideB, string corner)
         {
-            corner = corner.Remove(corner.Length - 1);
-            double cornerDouble = Double.Parse(corner);
+            double doubleCorner;
 
-            if ((cornerDouble > 0 && cornerDouble < 180) && (sideA > 0) && (sideB > 0))
+            corner = corner.Remove(corner.Length - 1);
+            doubleCorner = Double.Parse(corner);
+
+            if ((doubleCorner > 0 && doubleCorner < 180) && (sideA > 0) && (sideB > 0))
             {
                 double sideC;
-                sideC = Math.Sqrt(Math.Pow(sideA, 2) + Math.Pow(sideB, 2) - 2 * sideA * sideB * Math.Cos(cornerDouble));
+                sideC = Math.Sqrt(Math.Pow(sideA, 2) + Math.Pow(sideB, 2) - 2 * sideA * sideB * Math.Cos(DegreeToRadian(doubleCorner)));
 
                 return new double[] { sideA, sideB, sideC };
             }
-            else return new double[] { };
+            else
+            {
+                return new double[] { };
+            }
         }
         public static double[] FindSides(string cornerA, string cornerB, double sideA)
         {
-
             cornerA = cornerA.Remove(cornerA.Length - 1);
             cornerB = cornerB.Remove(cornerB.Length - 1);
 
-            double cornerADouble = Double.Parse(cornerA);
-            double cornerBDouble = Double.Parse(cornerB);
+            double doubleCornerA = Double.Parse(cornerA);
+            double doubleCornerB = Double.Parse(cornerB);
 
-            if (cornerADouble + cornerBDouble < 180)
+            if (doubleCornerA + doubleCornerB < 180)
             {
-                double cornerCDouble = 180 - cornerADouble - cornerBDouble;
-
+                double cornerCDouble;
                 double dependenceSides;
-                dependenceSides = sideA / cornerCDouble;
+                double sideB;
+                double sideC;
 
-                return new double[] { sideA, cornerBDouble / dependenceSides, cornerCDouble / dependenceSides };
+                cornerCDouble = 180 - doubleCornerA - doubleCornerB;
+                dependenceSides = sideA / Math.Sin(DegreeToRadian(cornerCDouble));
+
+                sideB = Math.Sin(DegreeToRadian(doubleCornerB)) * dependenceSides;
+                sideC = Math.Sin(DegreeToRadian(doubleCornerA)) * dependenceSides;
+
+                return new double[] { sideA, sideB, sideC };
             }
-            else return new double[] { };
+            else
+            {
+                return new double[] { };
+            }
+        }
+        public static double DegreeToRadian(double degree)
+        {
+            return degree / 180.0 * Math.PI;
         }
     }
 }

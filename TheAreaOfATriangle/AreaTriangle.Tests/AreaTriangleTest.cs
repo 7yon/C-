@@ -7,15 +7,18 @@ namespace AreaTriangle.Tests
     public class AreaTriangleTest
     {
         [TestMethod]
-        public void RightAreaTriangle()
+        public void RightAreaAndSidesTriangle()
         {
             var a = 3;
             var b = 4;
-            var c = 5;
+            var corner = "90d";
 
-            Triangle triangle = new Triangle(1, 3, 6);
+            Triangle triangle = new Triangle(a, b, corner);
 
-            Assert.AreEqual(0, triangle.AreaCalculation());
+            Assert.AreEqual(6, triangle.AreaCalculation());
+            Assert.AreEqual(3, triangle.SideA);
+            Assert.AreEqual(4, triangle.SideB);
+            Assert.AreEqual(5, triangle.SideC);
         }
     }
 }

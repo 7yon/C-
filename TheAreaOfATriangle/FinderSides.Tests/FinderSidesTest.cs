@@ -10,11 +10,11 @@ namespace FinderSides.Tests
         [TestMethod]
         public void NonExistentSideTriangle()
         {
-            var a = 1;
-            var b = 4;
-            var c = 9;
+            var sideA = 1;
+            var sideB = 4;
+            var sideC = 9;
          
-            var area = FinderSidesTriangle.CheckSides(a, b, c);
+            var area = FinderSidesTriangle.CheckSides(sideA, sideB, sideC);
 
             Assert.AreEqual(0, area.Length);
         }
@@ -22,23 +22,26 @@ namespace FinderSides.Tests
         [TestMethod]
         public void OneBigCorner()
         {
-            var a = 4;
-            var b = 9;
-            var corner = "193d";
+            var sideA = 8.9;
+            var sideB = 3.9;
+            var corner = "190d";
 
-            var area = FinderSidesTriangle.FindSides(a, b, corner);
+            var area = FinderSidesTriangle.FindSides(sideA, sideB, corner);
+
             Assert.AreEqual(0, area.Length);
         }
 
         [TestMethod]
         public void TwoBigCorners()
         {
-            var a = 12;
+            var sideA = 5;
             var cornerA = "92d";
-            var cornerB = "100d";
+            var cornerB = "27d";
 
-            var area = FinderSidesTriangle.FindSides(cornerA, cornerB, a);
-            Assert.AreEqual(0, area.Length);
+            
+            var area = FinderSidesTriangle.FindSides(cornerA, cornerB, sideA);
+
+            Assert.AreEqual(3, area.Length);
         }
     }
 }

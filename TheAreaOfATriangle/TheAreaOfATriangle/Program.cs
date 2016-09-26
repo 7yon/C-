@@ -12,7 +12,7 @@ namespace AreaTriangle
     {
         static void Main(string[] args)
         {
-            Triangle triangle = new Triangle(5, 5, 5);
+            Triangle triangle = new Triangle(8.9, 3.9, "385d");
 
             Console.WriteLine(triangle.AreaCalculation());
         }
