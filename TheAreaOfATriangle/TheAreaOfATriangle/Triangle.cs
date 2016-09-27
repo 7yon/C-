@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AreaTriangle
+namespace TheAreaOfATriangle
 {
     public class Triangle 
     {
         public double edgeA { get; private set; }
         public double edgeB { get; private set; }
         public double edgeC { get; private set; }
-        public double Area { get; private set; }
+        private double Area;
 
         public Triangle() { }
 
@@ -39,7 +39,7 @@ namespace AreaTriangle
             return triangle;
         }
 
-        public void IsValidThreeSides(double edgeA, double edgeB, double edgeC)
+        private void IsValidThreeSides(double edgeA, double edgeB, double edgeC)
         {
             if ((edgeA + edgeB > edgeC) && (edgeA + edgeC > edgeB) && (edgeC + edgeB > edgeA))
             {
@@ -47,10 +47,10 @@ namespace AreaTriangle
                 this.edgeB = edgeB;
                 this.edgeC = edgeC;
             }
-            else throw new ArgumentException();
+            else throw new ArgumentException("Не выполняется правило: Сумма двух любых сторон всегда больше третьей стороны\n");
         }
 
-        public void IsValidTwoSidesAndAgle(double edgeA, double edgeB, double agle)
+        private void IsValidTwoSidesAndAgle(double edgeA, double edgeB, double agle)
         {            
             if ((agle > 0 && agle < 180) && (edgeA > 0) && (edgeB > 0))
             {
@@ -60,10 +60,10 @@ namespace AreaTriangle
                 this.edgeB = edgeB;
                 this.edgeC = sideC;
             }        
-            else throw new ArgumentException();
+            else throw new ArgumentException("Не выполняется одно или оба из правил: Стороны всегда принимают положительные значения и сумма двух углов всегда меньше 180 градусов\n");
         }
 
-        public void IsValidTwoAglesAndSide(double angleA, double angleB, double edgeA)
+        private void IsValidTwoAglesAndSide(double angleA, double angleB, double edgeA)
         {
             if (angleA + angleB < 180)
             {
@@ -77,15 +77,15 @@ namespace AreaTriangle
                 this.edgeB = sideB;
                 this.edgeC = sideC;
             }
-            else throw new ArgumentException();
+            else throw new ArgumentException("Не выполняется правило: Сумма двух углов меньше 180 градусов\n");
       }
 
-        public void CalculationArea()
+        public double CalculationArea()
         {
             double perimeter = (this.edgeA + this.edgeB + this.edgeC) / 2;           
+            this.Area = Math.Sqrt(perimeter * (perimeter - edgeA) * (perimeter - edgeB) * (perimeter - edgeC));
 
-            if (perimeter != 0)
-                this.Area = Math.Sqrt(perimeter * (perimeter - edgeA) * (perimeter - edgeB) * (perimeter - edgeC));           
+            return this.Area;   
         }
 
         public double DegreeToRadian(double degree)
