@@ -1,8 +1,8 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using TheAreaOfATriangle;
 
-namespace Triangle.Tests
+namespace AreaTriangle.Test
 {
     [TestClass]
     public class TriangleTest
