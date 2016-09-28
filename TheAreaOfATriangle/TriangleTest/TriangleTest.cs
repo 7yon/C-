@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TheAreaOfATriangle;
 
 namespace Triangle.Tests
 {
@@ -15,7 +16,7 @@ namespace Triangle.Tests
             var edgeB = 4;
             var edgeC = 9;
             
-            var area = AreaTriangle.Triangle.FromThreeSides(edgeA, edgeB, edgeC);
+            var area = Triangle.FromThreeSides(edgeA, edgeB, edgeC);
         }
 
         [TestMethod]
@@ -27,7 +28,7 @@ namespace Triangle.Tests
             var edgeB = 3.9;
             var agle = 190;
 
-            var area = TheAreaOfATriangle.Triangle.FromTwoSidesAndAngle(edgeA, edgeB, agle);          
+            var area = Triangle.FromTwoSidesAndAngle(edgeA, edgeB, agle);          
         }
 
         [TestMethod]
@@ -39,7 +40,7 @@ namespace Triangle.Tests
             var agleA = 92;
             var agleB = 127;
 
-            var area = TheAreaOfATriangle.Triangle.FromTwoAglesAndSide(agleA, agleB, edgeA);
+            var area = Triangle.FromTwoAglesAndSide(agleA, agleB, edgeA);
         }
 
         [TestMethod]
@@ -49,7 +50,7 @@ namespace Triangle.Tests
             var edgeB = 4;
             var agle = 90;
 
-            var area = TheAreaOfATriangle.Triangle.FromTwoSidesAndAngle(edgeA, edgeB, agle).Area;
+            var area = Triangle.FromTwoSidesAndAngle(edgeA, edgeB, agle).Area;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace TheAreaOfATriangle
         public double edgeA { get; private set; }
         public double edgeB { get; private set; }
         public double edgeC { get; private set; }
-        private double Area;
+        public double Area { get; private set; }
 
         public Triangle() { }
 
@@ -80,12 +80,10 @@ namespace TheAreaOfATriangle
             else throw new ArgumentException("Не выполняется правило: Сумма двух углов меньше 180 градусов\n");
       }
 
-        public double CalculationArea()
+        public void CalculationArea()
         {
             double perimeter = (this.edgeA + this.edgeB + this.edgeC) / 2;           
-            this.Area = Math.Sqrt(perimeter * (perimeter - edgeA) * (perimeter - edgeB) * (perimeter - edgeC));
-
-            return this.Area;   
+            this.Area = Math.Sqrt(perimeter * (perimeter - edgeA) * (perimeter - edgeB) * (perimeter - edgeC));  
         }
 
         public double DegreeToRadian(double degree)
