@@ -1,8 +1,0 @@
-c:\users\дарья\documents\visual studio 2015\Projects\TheAreaOfATriangle\TheAreaOfATriangle\bin\Debug\TheAreaOfATriangle.exe.config
-c:\users\дарья\documents\visual studio 2015\Projects\TheAreaOfATriangle\TheAreaOfATriangle\bin\Debug\TheAreaOfATriangle.exe
-c:\users\дарья\documents\visual studio 2015\Projects\TheAreaOfATriangle\TheAreaOfATriangle\bin\Debug\TheAreaOfATriangle.pdb
-c:\users\дарья\documents\visual studio 2015\Projects\TheAreaOfATriangle\TheAreaOfATriangle\obj\Debug\TheAreaOfATriangle.csprojResolveAssemblyReference.cache
-c:\users\дарья\documents\visual studio 2015\Projects\TheAreaOfATriangle\TheAreaOfATriangle\obj\Debug\TheAreaOfATriangle.exe
-c:\users\дарья\documents\visual studio 2015\Projects\TheAreaOfATriangle\TheAreaOfATriangle\obj\Debug\TheAreaOfATriangle.pdb
-c:\users\дарья\documents\visual studio 2015\Projects\TheAreaOfATriangle\TheAreaOfATriangle\bin\Debug\FinderSides.dll
-c:\users\дарья\documents\visual studio 2015\Projects\TheAreaOfATriangle\TheAreaOfATriangle\bin\Debug\FinderSides.pdb
