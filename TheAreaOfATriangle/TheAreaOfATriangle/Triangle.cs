@@ -65,7 +65,7 @@ namespace TheAreaOfATriangle
                 throw new ArgumentException("Не выполняется правило: Сумма двух углов меньше 180 градусов\n");
         }
 
-        public static bool IsValidThreeSides(double edgeA, double edgeB, double edgeC)
+        private static bool IsValidThreeSides(double edgeA, double edgeB, double edgeC)
         {
             if ((edgeA + edgeB > edgeC) && (edgeA + edgeC > edgeB) && (edgeC + edgeB > edgeA))
             {
@@ -75,7 +75,7 @@ namespace TheAreaOfATriangle
                 return false;
         }
 
-        public static bool IsValidTwoSidesAndAgle(double edgeA, double edgeB, double agle)
+        private static bool IsValidTwoSidesAndAgle(double edgeA, double edgeB, double agle)
         {
             if ((agle > 0 && agle < 180) && (edgeA > 0) && (edgeB > 0))
             {
@@ -85,7 +85,7 @@ namespace TheAreaOfATriangle
                 return false;
         }
 
-        public static bool IsValidTwoAglesAndSide(double angleA, double angleB, double edgeA)
+        private static bool IsValidTwoAglesAndSide(double angleA, double angleB, double edgeA)
         {
             if (angleA + angleB < 180)
             {
@@ -101,7 +101,7 @@ namespace TheAreaOfATriangle
             this.Area = Math.Sqrt(perimeter * (perimeter - edgeA) * (perimeter - edgeB) * (perimeter - edgeC));  
         }
 
-        public static double DegreeToRadian(double degree)
+        private static double DegreeToRadian(double degree)
         {
             return degree / 180.0 * Math.PI;
         }
