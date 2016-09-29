@@ -26,9 +26,9 @@ namespace AreaTriangle.Test
         {
             var edgeA = 8.9;
             var edgeB = 3.9;
-            var agle = 190;
+            var angle = 190;
 
-            var area = Triangle.FromTwoSidesAndAngle(edgeA, edgeB, agle);          
+            var area = Triangle.FromTwoSidesAndAngle(edgeA, edgeB, angle);          
         }
 
         [TestMethod]
@@ -37,10 +37,10 @@ namespace AreaTriangle.Test
         public void Triangle_TryCreateImpossibleTriangleWithTwoReflexAngles_MustThrowException()
         {
             var edgeA = 5;
-            var agleA = 92;
-            var agleB = 127;
+            var angleA = 92;
+            var angleB = 127;
 
-            var area = Triangle.FromTwoAglesAndSide(agleA, agleB, edgeA);
+            var area = Triangle.FromTwoAglesAndSide(angleA, angleB, edgeA);
         }
 
         [TestMethod]
@@ -48,9 +48,9 @@ namespace AreaTriangle.Test
         {
             var edgeA = 3;
             var edgeB = 4;
-            var agle = 90;
+            var angle = 90;
 
-            var area = Triangle.FromTwoSidesAndAngle(edgeA, edgeB, agle).Area;
+            var area = Triangle.FromTwoSidesAndAngle(edgeA, edgeB, angle).Area;
 
             Assert.AreEqual(6, area);
         }

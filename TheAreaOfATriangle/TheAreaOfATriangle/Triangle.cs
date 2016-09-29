@@ -8,18 +8,18 @@ namespace TheAreaOfATriangle
 {
     public class Triangle 
     {
-        public double edgeA { get; private set; }
-        public double edgeB { get; private set; }
-        public double edgeC { get; private set; }
+        public double EdgeA { get; private set; }
+        public double EdgeB { get; private set; }
+        public double EdgeC { get; private set; }
         public double Area { get; private set; }
 
         public Triangle() { }
 
         private Triangle(double edgeA, double edgeB, double edgeC)
         {
-            this.edgeA = edgeA;
-            this.edgeB = edgeB;
-            this.edgeC = edgeC;
+            this.EdgeA = edgeA;
+            this.EdgeB = edgeB;
+            this.EdgeC = edgeC;
 
             this.CalculateArea();
         }
@@ -67,38 +67,23 @@ namespace TheAreaOfATriangle
 
         private static bool IsValidThreeSides(double edgeA, double edgeB, double edgeC)
         {
-            if ((edgeA + edgeB > edgeC) && (edgeA + edgeC > edgeB) && (edgeC + edgeB > edgeA))
-            {
-                return true;
-            }
-            else
-                return false;
+            return ((edgeA + edgeB > edgeC) && (edgeA + edgeC > edgeB) && (edgeC + edgeB > edgeA));           
         }
 
-        private static bool IsValidTwoSidesAndAgle(double edgeA, double edgeB, double agle)
+        private static bool IsValidTwoSidesAndAgle(double edgeA, double edgeB, double angle)
         {
-            if ((agle > 0 && agle < 180) && (edgeA > 0) && (edgeB > 0))
-            {
-                return true;
-            }
-            else
-                return false;
+            return (angle > 0 && angle < 180) && edgeA > 0 && edgeB > 0;
         }
 
         private static bool IsValidTwoAglesAndSide(double angleA, double angleB, double edgeA)
         {
-            if (angleA + angleB < 180)
-            {
-                return true;
-            }
-            else
-                return false;
-      }
+            return angleA + angleB < 180;          
+        }
 
         private void CalculateArea()
         {
-            double perimeter = (this.edgeA + this.edgeB + this.edgeC) / 2;           
-            this.Area = Math.Sqrt(perimeter * (perimeter - edgeA) * (perimeter - edgeB) * (perimeter - edgeC));  
+            double perimeter = (this.EdgeA + this.EdgeB + this.EdgeC) / 2;           
+            this.Area = Math.Sqrt(perimeter * (perimeter - EdgeA) * (perimeter - EdgeB) * (perimeter - EdgeC));  
         }
 
         private static double DegreeToRadian(double degree)
