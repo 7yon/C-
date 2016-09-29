@@ -34,7 +34,7 @@ namespace TheAreaOfATriangle
             Triangle triangle = new Triangle();
             if(triangle.IsValidTwoSidesAndAgle(edgeA, edgeB, angle))
             {
-                double sideC = Math.Sqrt(Math.Pow(edgeA, 2) + Math.Pow(edgeB, 2) - 2 * edgeA * edgeB * Math.Cos(DegreeToRadian(agle)));
+                double sideC = Math.Sqrt(Math.Pow(edgeA, 2) + Math.Pow(edgeB, 2) - 2 * edgeA * edgeB * Math.Cos(triangle.DegreeToRadian(angle)));
 
                 triangle.edgeA = edgeA;
                 triangle.edgeB = edgeB;

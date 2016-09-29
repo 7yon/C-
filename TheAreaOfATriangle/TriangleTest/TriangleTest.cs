@@ -51,6 +51,8 @@ namespace AreaTriangle.Test
             var agle = 90;
 
             var area = Triangle.FromTwoSidesAndAngle(edgeA, edgeB, agle).Area;
+
+            Assert.AreEqual(6, area);
         }
     }
 }
