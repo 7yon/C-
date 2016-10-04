@@ -14,11 +14,9 @@ namespace FifteenPuzzle
 
         public Game(params int[] objectsGame)
         {        
-            if (CheckNotDuplicateValuesObjectsGame(objectsGame) 
-                && CheckCountObjectsGame(objectsGame) 
-                && CheckMissingValuesObjectsGame(objectsGame))
+            if (CheckObjectsGame(objectsGame))
             {
-                dimensionField = (int)Math.Sqrt(objectsGame.Length);
+                dimensionField = (int)Math.Truncate(Math.Sqrt(objectsGame.Length));
                 playingField = new int[dimensionField, dimensionField];
                 locationCell = new Cell[dimensionField * dimensionField];
 
@@ -39,30 +37,25 @@ namespace FifteenPuzzle
             get {
                 if ((x >= 0 && x < dimensionField) && (x >= 0 && x < dimensionField))
                     return playingField[x, y];
-                else throw new ArgumentException("Индесы выходят за пределы массива!");
+                else throw new ArgumentOutOfRangeException();
             }
         }
 
         public Cell GetLocation(int value)
         {
-            return locationCell[value];
+            if ((value >= 0) && (value < dimensionField * dimensionField))
+                return locationCell[value];
+            else throw new ArgumentOutOfRangeException();
         }
 
-        private bool CheckCountObjectsGame(int[] objectsGame)
+        private bool CheckObjectsGame(int[] objectsGame)
         {
             double dimensionField = Math.Sqrt(objectsGame.Length);
-            double wholePartDimensionField = dimensionField - (dimensionField % (int)dimensionField);
+            double wholePartDimensionField = dimensionField - (dimensionField % (int)Math.Truncate(dimensionField));
 
-            if ((dimensionField - wholePartDimensionField) == 0)
-            {
-                return true;
-            }
-            else
+            if ((dimensionField - wholePartDimensionField) != 0)
                 throw new ArgumentException("Из данного количества аргументов в массиве невозможно построить квадратное игровое поле!");
-        }
 
-        private bool CheckNotDuplicateValuesObjectsGame(int[] objectsGame)
-        {
             for (int i = 0; i < objectsGame.Length; i++)
             {
                 int value = objectsGame[i];
@@ -72,21 +65,18 @@ namespace FifteenPuzzle
                         throw new ArgumentException("Повторяющиеся значения в аргументах конструктора!");
                 }
             }
-            return true;
-        }
 
-        private bool CheckMissingValuesObjectsGame(int[] objectsGame)
-        {
             int length = objectsGame.Length;
             for (int i = 0; i < length; i++)
             {
                 if ((objectsGame[i] < 0) || (objectsGame[i] >= length))
                     throw new ArgumentException("Значение < 0 или >= количества элементов!");
             }
+
             return true;
         }
 
-        public void Shift(int value)
+          public void Shift(int value)
         {
             Cell currentCell = GetLocation(value);
             Cell zeroCell = MoveTo(currentCell);
@@ -104,28 +94,11 @@ namespace FifteenPuzzle
 
         private Cell MoveTo(Cell cell)
         {
-            if (cell.X != dimensionField - 1)
-            {
-                if (playingField[cell.X + 1, cell.Y] == 0)
-                    return GetLocation(0);
-            }
-            if (cell.X != 0)
-            {
-                if (playingField[cell.X - 1, cell.Y] == 0)
-                    return GetLocation(0);
-            }
-            if (cell.Y != 0)
-            {
-                if (playingField[cell.X, cell.Y - 1] == 0)
-                    return GetLocation(0);
-            }
-            if (cell.Y != dimensionField - 1)
-            {
-                if (playingField[cell.X, cell.Y + 1] == 0)
-                    return GetLocation(0);
-            }
+            Cell zero = GetLocation(0);
 
-            return null;
+            if (((Math.Abs(zero.X - cell.X) == 1) &&(zero.Y == cell.Y)) || ((Math.Abs(zero.Y - cell.Y) == 1)&& (zero.X==cell.X)))
+                return zero;
+            else return null;
         }
     }
 }

@@ -16,11 +16,5 @@ namespace FifteenPuzzle
             this.X = x;
             this.Y = y;
         }
-
-        public void ChangeCoordinates(Cell cell)
-        {
-            X = cell.X;
-            Y = cell.Y;
-        }
     }
 }
