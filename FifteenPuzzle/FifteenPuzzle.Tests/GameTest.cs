@@ -55,7 +55,7 @@ namespace FifteenPuzzle.Tests
         }
 
         [TestMethod]
-        public void Game_TryMoveCellToZeroCell_MustMoveCell()
+        public void Game_TryMoveCellToZeroCell_MustCorrectMoveCell()
         {
             Game game = new Game(1, 2, 3, 0, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
 
@@ -68,7 +68,7 @@ namespace FifteenPuzzle.Tests
         }
 
         [TestMethod]
-        public void Game_TryGetCoordinatesOfValue_MustMoveCell()
+        public void Game_TryGetCoordinatesOfValue_MustCorrectMoveCell()
         {
             Game game = new Game(1, 2, 3, 0, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
 
@@ -79,7 +79,7 @@ namespace FifteenPuzzle.Tests
         }
 
         [TestMethod]
-        public void Game_TryGetValueOfCoordinates_MustGetValueCell()
+        public void Game_TryGetValueOfCoordinates_MustGetCorrectValueCell()
         {
             Game game = new Game(1, 2, 3, 0, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
 
