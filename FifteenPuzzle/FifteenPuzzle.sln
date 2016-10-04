@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FifteenPuzzle", "FifteenPuzzle\FifteenPuzzle.csproj", "{ABFC8C15-2939-48C1-AF05-BF66FE4DE6A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FifteenPuzzle.Tests", "FifteenPuzzle.Tests\FifteenPuzzle.Tests.csproj", "{ECF7D676-BC02-4E8F-87D4-1A2ABF9AA46B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ABFC8C15-2939-48C1-AF05-BF66FE4DE6A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABFC8C15-2939-48C1-AF05-BF66FE4DE6A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABFC8C15-2939-48C1-AF05-BF66FE4DE6A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABFC8C15-2939-48C1-AF05-BF66FE4DE6A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECF7D676-BC02-4E8F-87D4-1A2ABF9AA46B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECF7D676-BC02-4E8F-87D4-1A2ABF9AA46B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECF7D676-BC02-4E8F-87D4-1A2ABF9AA46B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECF7D676-BC02-4E8F-87D4-1A2ABF9AA46B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -8,33 +8,19 @@ namespace FifteenPuzzle
 {
     public class Cell
     {
-        public int x { get; set; }
-        public int y { get; set; }
+        public int X { get; private set; }
+        public int Y { get; private set; }
 
         public Cell(int x, int y)
         {
-            this.x = x;
-            this.y = y;
+            this.X = x;
+            this.Y = y;
         }
 
-        //public void MoveUp()
-        //{
-        //    x += 1;
-        //}
-
-        //public void MoveDown()
-        //{
-        //    x -= 1;
-        //}
-
-        //public void MoveLeft()
-        //{
-        //    y -= 1;
-        //}
-
-        //public void MoveRight()
-        //{
-        //    y += 1;
-        //}
+        public void ChangeCoordinates(Cell cell)
+        {
+            X = cell.X;
+            Y = cell.Y;
+        }
     }
 }

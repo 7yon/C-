@@ -14,8 +14,11 @@ namespace FifteenPuzzle
 
         public Game(params int[] objectsGame)
         {        
-            if (CheckNotDuplicateValuesObjectsGame(objectsGame) && CheckCountObjectsGame(objectsGame) && CheckMissingValuesObjectsGame(objectsGame))
+            if (CheckNotDuplicateValuesObjectsGame(objectsGame) 
+                && CheckCountObjectsGame(objectsGame) 
+                && CheckMissingValuesObjectsGame(objectsGame))
             {
+                dimensionField = (int)Math.Sqrt(objectsGame.Length);
                 playingField = new int[dimensionField, dimensionField];
                 locationCell = new Cell[dimensionField * dimensionField];
 
@@ -33,7 +36,11 @@ namespace FifteenPuzzle
 
         public int this[int x, int y]
         {
-            get { return playingField[x, y]; }
+            get {
+                if ((x >= 0 && x < dimensionField) && (x >= 0 && x < dimensionField))
+                    return playingField[x, y];
+                else throw new ArgumentException("Индесы выходят за пределы массива!");
+            }
         }
 
         public Cell GetLocation(int value)
@@ -48,7 +55,6 @@ namespace FifteenPuzzle
 
             if ((dimensionField - wholePartDimensionField) == 0)
             {
-                this.dimensionField = (int)wholePartDimensionField;
                 return true;
             }
             else
@@ -83,98 +89,43 @@ namespace FifteenPuzzle
         public void Shift(int value)
         {
             Cell currentCell = GetLocation(value);
+            Cell zeroCell = MoveTo(currentCell);
 
-            if (CheckMoveUp(currentCell))
+            if (zeroCell != null)
             {
-                playingField[currentCell.x, currentCell.y] = 0;
-                playingField[locationCell[0].x, locationCell[0].y] = value;
+                playingField[currentCell.X, currentCell.Y] = 0;
+                playingField[locationCell[0].X, locationCell[0].Y] = value;
 
-                locationCell[value].x++;
-                locationCell[0].x--;
-            }
-            else if (CheckMoveDown(currentCell))
-            {
-                playingField[currentCell.x, currentCell.y] = 0;
-                playingField[locationCell[0].x, locationCell[0].y] = value;
-
-                locationCell[value].x--;
-                locationCell[0].x++;
-            }
-            else if (CheckMoveLeft(currentCell))
-            {
-                playingField[currentCell.x, currentCell.y] = 0;
-                playingField[locationCell[0].x, locationCell[0].y] = value;
-
-                locationCell[value].y++;
-                locationCell[0].y--;
-            }
-            else if (CheckMoveRight(currentCell))
-            {
-                playingField[currentCell.x, currentCell.y] = 0;
-                playingField[locationCell[0].x, locationCell[0].y] = value;
-
-                locationCell[value].y++;
-                locationCell[0].y--;
+                locationCell[0] = locationCell[value];
+                locationCell[value] = zeroCell;
             }
             else throw new ArgumentException("Ноль находится не на соседнем месте!");
         }
 
-        private bool CheckMoveUp(Cell cell)
+        private Cell MoveTo(Cell cell)
         {
-            if (cell.y != 0)
+            if (cell.X != dimensionField - 1)
             {
-                if (playingField[cell.x, cell.y + 1] == 0)
-                    return true;
-                else
-                    return false;
+                if (playingField[cell.X + 1, cell.Y] == 0)
+                    return GetLocation(0);
+            }
+            if (cell.X != 0)
+            {
+                if (playingField[cell.X - 1, cell.Y] == 0)
+                    return GetLocation(0);
+            }
+            if (cell.Y != 0)
+            {
+                if (playingField[cell.X, cell.Y - 1] == 0)
+                    return GetLocation(0);
+            }
+            if (cell.Y != dimensionField - 1)
+            {
+                if (playingField[cell.X, cell.Y + 1] == 0)
+                    return GetLocation(0);
             }
 
-            return false;
-        }
-
-        private bool CheckMoveDown(Cell cell)
-        {
-            if (cell.x != dimensionField - 1)
-            {
-                if (playingField[cell.x - 1, cell.y] == 0)
-                    return true;
-                else
-                    return false;
-            }
-
-            return false;
-        }
-
-        private bool CheckMoveLeft(Cell cell)
-        {
-            if (cell.y != 0)
-            {
-                if (playingField[cell.x, cell.y - 1] == 0)
-                    return true;
-                else
-                    return false;
-            }
-
-            return false;
-        }
-
-        private bool CheckMoveRight(Cell cell)
-        {
-            if (cell.y != dimensionField - 1)
-            {
-                if (playingField[cell.x, cell.y + 1] == 0)
-                    return true;
-                else
-                    return false;
-            }
-
-            return false;
-        }
-     
-        static void Main(string[] args)
-        {
-            Game g = new Game(1, 2, 3, 0);
-            g.Shift(3);
+            return null;
         }
     }
 }

@@ -22,7 +22,7 @@ namespace FifteenPuzzle.Tests
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void Game_TryCreateImpossiblePlayingFieldWithIncorrectCellValues_MustThrowException()
+        public void Game_TryCreateImpossiblePlayingFieldWithIncorrectValuesvaluesNotFromRange_MustThrowException()
         {
             Game game = new Game(1, 2, 2, 4, 12, 5, 6, 7, 0);
         }
@@ -34,6 +34,45 @@ namespace FifteenPuzzle.Tests
             Game game = new Game(1, 2, 3, 0, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
 
             game.Shift(14);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Game_TryGetValueOfIncorrectCoordinates_MustThrowException()
+        {
+            Game game = new Game(1, 2, 3, 0, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
+
+            int value = game[9, 2];
+        }
+
+        [TestMethod]
+        public void Game_TryMoveCellToZeroCell_MustNotThrowException()
+        {
+            Game game = new Game(1, 2, 3, 0, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
+
+            game.Shift(3);
+        }
+
+        [TestMethod]
+        public void Game_TryGetCoordinatesOfValue_MustNotThrowException()
+        {
+            Game game = new Game(1, 2, 3, 0, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
+
+            Cell currentCell = game.GetLocation(3);
+
+            Assert.AreEqual(0, currentCell.X);
+            Assert.AreEqual(2, currentCell.Y);
+        }
+
+        [TestMethod]
+        public void Game_TryGetValueOfCoordinates_MustNotThrowException()
+        {
+            Game game = new Game(1, 2, 3, 0, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
+
+            int value = game[1, 2];
+
+            Assert.AreEqual(6, value);
+
         }
     }
 }
