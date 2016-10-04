@@ -24,7 +24,7 @@ namespace FifteenPuzzle.Tests
         [ExpectedException(typeof(ArgumentException))]
         public void Game_TryCreateImpossiblePlayingFieldWithIncorrectCellValues_MustThrowException()
         {
-            Game game = new Game(1, 2, 2, 4, 8, 5, 6, 7, 0);
+            Game game = new Game(1, 2, 2, 4, 12, 5, 6, 7, 0);
         }
 
         [TestMethod]

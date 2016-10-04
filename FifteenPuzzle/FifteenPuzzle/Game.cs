@@ -52,7 +52,7 @@ namespace FifteenPuzzle
                 return true;
             }
             else
-                throw new ArgumentException("Из данного клоичества аргументов в массиве невозможно построить квадратное игровое поле!");
+                throw new ArgumentException("Из данного количества аргументов в массиве невозможно построить квадратное игровое поле!");
         }
 
         private bool CheckNotDuplicateValuesObjectsGame(int[] objectsGame)
@@ -75,7 +75,7 @@ namespace FifteenPuzzle
             for (int i = 0; i < length; i++)
             {
                 if ((objectsGame[i] < 0) || (objectsGame[i] >= length))
-                    throw new ArgumentException("Недопустимое значение!");
+                    throw new ArgumentException("Значение < 0 или >= количества элементов!");
             }
             return true;
         }
