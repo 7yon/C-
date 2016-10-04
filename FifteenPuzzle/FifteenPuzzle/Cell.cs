@@ -16,5 +16,11 @@ namespace FifteenPuzzle
             this.X = x;
             this.Y = y;
         }
+
+        public Cell(Cell cell)
+        {
+            this.X = cell.X;
+            this.Y = cell.Y;
+        }
     }
 }

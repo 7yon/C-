@@ -10,7 +10,9 @@ namespace FifteenPuzzle
     {
         static void Main(string[] args)
         {
-            
+            ImmutableGame game = new ImmutableGame(1, 2, 3, 0);
+
+            game.Shift(3);
         }
     }
 }

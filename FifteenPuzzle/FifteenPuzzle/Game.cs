@@ -8,47 +8,58 @@ namespace FifteenPuzzle
 {
     public class Game
     {
-        private int[,] playingField;
-        private Cell[] locationCell;
-        private int dimensionField;
+        public int[,] PlayingField { get; private set; }
+        public Cell[] LocationCell { get; private set; }
+        public int DimensionField { get; private set; }
 
         public Game(params int[] objectsGame)
         {        
             if (CheckObjectsGame(objectsGame))
             {
-                dimensionField = (int)Math.Truncate(Math.Sqrt(objectsGame.Length));
-                playingField = new int[dimensionField, dimensionField];
-                locationCell = new Cell[dimensionField * dimensionField];
+                DimensionField = (int)Math.Truncate(Math.Sqrt(objectsGame.Length));
+                PlayingField = new int[DimensionField, DimensionField];
+                LocationCell = new Cell[DimensionField * DimensionField];
 
-                for(int i = 0; i < dimensionField; i++)
+                for(int i = 0; i < DimensionField; i++)
                 {
-                    for(int j = 0;j < dimensionField; j++)
+                    for(int j = 0;j < DimensionField; j++)
                     {
-                        int value = objectsGame[i * dimensionField + j];
-                        playingField[i, j] = value;
-                        locationCell[value] = new Cell(i, j);                      
+                        int value = objectsGame[i * DimensionField + j];
+                        PlayingField[i, j] = value;
+                        LocationCell[value] = new Cell(i, j);                      
                     }
                 }
+            }
+        }
+        
+        public Game(Game game)
+        {
+            game.PlayingField.CopyTo(this.PlayingField, 0);
+            this.LocationCell = new Cell[game.LocationCell.Length];
+
+            for (int i = 0; i < game.LocationCell.Length; i++)
+            {
+                this.LocationCell[i] = new Cell(game.LocationCell[i]);
             }
         }
 
         public int this[int x, int y]
         {
             get {
-                if ((x >= 0 && x < dimensionField) && (x >= 0 && x < dimensionField))
-                    return playingField[x, y];
+                if ((x >= 0 && x < DimensionField) && (x >= 0 && x < DimensionField))
+                    return PlayingField[x, y];
                 else throw new ArgumentOutOfRangeException();
             }
         }
 
         public Cell GetLocation(int value)
         {
-            if ((value >= 0) && (value < dimensionField * dimensionField))
-                return locationCell[value];
+            if ((value >= 0) && (value < DimensionField * DimensionField))
+                return LocationCell[value];
             else throw new ArgumentOutOfRangeException();
         }
 
-        private bool CheckObjectsGame(int[] objectsGame)
+        protected bool CheckObjectsGame(int[] objectsGame)
         {           
             int closestRoot = (int)Math.Sqrt(objectsGame.Length);
           
@@ -75,18 +86,20 @@ namespace FifteenPuzzle
             return true;
         }
 
-        public void Shift(int value)
+        public Game Shift(int value)
         {
             Cell currentCell = GetLocation(value);
             Cell zeroCell = MoveTo(currentCell);
 
             if (zeroCell != null)
             {
-                playingField[currentCell.X, currentCell.Y] = 0;
-                playingField[locationCell[0].X, locationCell[0].Y] = value;
+                PlayingField[currentCell.X, currentCell.Y] = 0;
+                PlayingField[LocationCell[0].X, LocationCell[0].Y] = value;
 
-                locationCell[0] = locationCell[value];
-                locationCell[value] = zeroCell;
+                LocationCell[0] = LocationCell[value];
+                LocationCell[value] = zeroCell;
+
+                return this;
             }
             else throw new ArgumentException("Ноль находится не на соседнем месте!");
         }
