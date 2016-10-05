@@ -31,17 +31,6 @@ namespace FifteenPuzzle
                 }
             }
         }
-        
-        public Game(Game game)
-        {
-            game.PlayingField.CopyTo(this.PlayingField, 0);
-            this.LocationCell = new Cell[game.LocationCell.Length];
-
-            for (int i = 0; i < game.LocationCell.Length; i++)
-            {
-                this.LocationCell[i] = new Cell(game.LocationCell[i]);
-            }
-        }
 
         public int this[int x, int y]
         {
@@ -104,7 +93,7 @@ namespace FifteenPuzzle
             else throw new ArgumentException("Ноль находится не на соседнем месте!");
         }
 
-        private Cell MoveTo(Cell cell)
+        protected Cell MoveTo(Cell cell)
         {
             Cell zero = GetLocation(0);
 

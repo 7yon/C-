@@ -6,23 +6,34 @@ using System.Threading.Tasks;
 
 namespace FifteenPuzzle
 {
-    class ImmutableGame : Game
+    public class ImmutableGame : Game
     {
         public ImmutableGame(params int[] objectsGame) : base(objectsGame)
-        {
-            
-        }
-        
-        public ImmutableGame(Game game) : base(game)
         {
             
         }
 
         public new ImmutableGame Shift(int value)
         {
-            Game newGame = base.Shift(value);
+            int[] objects = new int[DimensionField * DimensionField];
 
-            return new ImmutableGame(newGame);           
+            Cell currentCell = GetLocation(value);
+            Cell zeroCell = MoveTo(currentCell);
+
+            if (zeroCell != null)
+            {
+                for (int i = 0; i < DimensionField; i++)
+                {
+                    for (int j = 0; j < DimensionField; j++)
+                    {
+                        objects[i * DimensionField + j] = PlayingField[i, j];
+                    }
+                }
+
+                objects[currentCell.X * DimensionField + currentCell.Y] = 0;
+                objects[zeroCell.X * DimensionField + zeroCell.Y] = value;
+            }
+                return new ImmutableGame(objects);           
         }
     }
 }
