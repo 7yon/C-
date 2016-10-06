@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FifteenPuzzle
 {
-    public class Game
+    public class Game 
     {
         public int[,] PlayingField { get; private set; }
         public Cell[] LocationCell { get; private set; }
@@ -93,7 +93,7 @@ namespace FifteenPuzzle
             else throw new ArgumentException("Ноль находится не на соседнем месте!");
         }
 
-        protected Cell MoveTo(Cell cell)
+        internal Cell MoveTo(Cell cell)
         {
             Cell zero = GetLocation(0);
 

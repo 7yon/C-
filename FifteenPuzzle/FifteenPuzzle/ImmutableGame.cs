@@ -33,7 +33,8 @@ namespace FifteenPuzzle
                 objects[currentCell.X * DimensionField + currentCell.Y] = 0;
                 objects[zeroCell.X * DimensionField + zeroCell.Y] = value;
             }
-                return new ImmutableGame(objects);           
+
+            return new ImmutableGame(objects);           
         }
     }
 }
