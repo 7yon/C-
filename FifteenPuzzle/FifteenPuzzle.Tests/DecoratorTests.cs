@@ -24,33 +24,9 @@ namespace FifteenPuzzle.Tests
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void Decorator_TryGetValueOfIncorrectCoordinates_MustThrowException()
-        {
-            int value = decorator[7, 2];
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void Decorator_TryMoveIncorrectCellToZeroCell_MustThrowException()
         {
             Decorator game = decorator.Shift(99);
-        }
-
-        [TestMethod]
-        public void Decorator_TryGetCoordinatesOfCorrectValue_MustGetCorrectCoordinates()
-        {           
-            Cell cell = decorator.GetLocation(6);
-
-            Assert.AreEqual(1, cell.X);
-            Assert.AreEqual(2, cell.Y);
-        }
-
-        [TestMethod]
-        public void Decorator_TryGetValueOfCorrectCoordinates_MustGetValue()
-        {
-            int value = decorator[1, 2];
-
-            Assert.AreEqual(6, value);
         }
 
         [TestMethod]
