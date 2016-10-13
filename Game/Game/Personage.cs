@@ -14,7 +14,7 @@ namespace Game
         private int speedRegenerationOfMana;
         private int mana;
 
-        private List<Ability> abilities;
+        private Dictionary<int, Ability> abilities;
         private List<ResultOfAbility> personageChanges;
 
         Personage()
@@ -48,11 +48,14 @@ namespace Game
             return currentMana;
         }
 
-        public void UseAbility(Personage personage, Ability ability)
+        public void UseAbility(Personage personage, int id)
         {
-            //первый аргумент - на кого применяем способность, второй - что применяем
+            //первый аргумент - на кого применяем способность, второй - id способности, которую применяем    
+            //находим в Dictionary необходимую способность    
             //у текущего персонажа списываем стоимость применённой спобности
             //и прибавляем действующие на него последствия способности, которые рассчитываются, то есть
+
+            //Ability ability = abilities[id];
             //AddResultOfAbility(ability.CalculateResult());
         }
 

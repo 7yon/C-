@@ -8,6 +8,8 @@ namespace Game
 {
     class Ability
     {
+        protected int id;
+        protected string description;
         protected int cost;
 
         protected int durationOfRecharge;
