@@ -8,10 +8,9 @@ namespace Game
 {
     class AbilityForHealth: Ability
     {
-        public override ResultOfAbility CalculateResult(int difference)
+        public override void Execute(Personage personage, int difference)
         {
-            //resultOfAbility.differenceOfHealth = difference;
-            return null;
+            personage.Health += difference;          
         }
     }
 }

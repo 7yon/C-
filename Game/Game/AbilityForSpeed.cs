@@ -8,10 +8,9 @@ namespace Game
 {
     class AbilityForSpeed:Ability
     {
-        public override ResultOfAbility CalculateResult(int difference)
+        public override void Execute(Personage personage, int difference)
         {
-            //resultOfAbility.differenceOfSpeed = difference;
-            return null;
+            personage.SpeedMovement += difference;
         }
     }
 }

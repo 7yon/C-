@@ -19,14 +19,12 @@ namespace Game
 
         public bool IsAvailable() 
         {
-            //доступность способности
-            //если время конца перезарядки больше чем текущее, то способность дотупна
+            // Если время конца перезарядки больше чем текущее, то способность дотупна.
             return true;
         }
 
-        public virtual ResultOfAbility CalculateResult(int difference)
+        public virtual void Execute(Personage personage, int difference)
         {
-            return null;
         }
 
     }
