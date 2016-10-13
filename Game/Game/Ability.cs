@@ -23,9 +23,9 @@ namespace Game
             return true;
         }
 
-        public virtual void Execute(Personage personage, int difference)
+        public void Execute(Personage personage, int difference)
         {
+            personage.AddEffects(new Effect(difference, id));
         }
-
     }
 }

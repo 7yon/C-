@@ -8,11 +8,13 @@ namespace Game
 {
     public class Effect
     {
+        public int IDAbility { get; private set; }
         public int value { get; protected set; }
 
-        public Effect(int value)
+        public Effect(int value, int IDAbility)
         {
             this.value = value;
+            this.IDAbility = IDAbility;
         }
     }
 }

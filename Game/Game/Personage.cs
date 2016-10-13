@@ -8,17 +8,44 @@ namespace Game
 {
     class Personage
     {
-        public int HitPoints { get; set; }
-        public int Health { get; set; }
-        public int SpeedMovement { get; set; }
-        public int SpeedRegenerationOfMana { get; set; }
-        public int Mana { get; set; }
+        private int hitPoints;
+        private int health;
+        private int speedMovement;
+        private int speedRegenerationOfMana;
+        private int mana;
 
         private Dictionary<int, Ability> abilities = new Dictionary<int, Ability>();
         private List<Effect> effects = new List<Effect>();
 
         Personage()
         {
+        }
+
+        public int GetCurrentHealth()
+        {
+            int currentHelth = health;
+            // Просматриваем все способности, ищем необходимую и узнаем её id.
+            // Просматриваем все эффекты и если id эффекта == id необходимой способности, то суммируем.
+
+            return currentHelth;
+        }
+
+        public int GetCurrentSpeed()
+        {
+            int currentSpeed = speedMovement;
+
+            // См. Предыдущий комментарий
+
+            return currentSpeed;
+        }
+
+        public int GetCurrentMana()
+        {
+            int currentMana = mana;
+
+            // См. Предыдущий комментарий
+
+            return currentMana;
         }
 
         public void UseAbility(Personage personage, int id)
