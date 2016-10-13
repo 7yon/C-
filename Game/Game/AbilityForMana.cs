@@ -10,7 +10,7 @@ namespace Game
     {
         public override void Execute(Personage personage, int difference)
         {
-            personage.Mana += difference;
+            personage.AddEffects(new EffectAbilityForMana(difference));
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Game
     {
         public override void Execute(Personage personage, int difference)
         {
-            personage.SpeedMovement += difference;
+            personage.AddEffects(new EffectAbilityForSpeed(difference));
         }
     }
 }

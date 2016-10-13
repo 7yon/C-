@@ -14,7 +14,8 @@ namespace Game
         public int SpeedRegenerationOfMana { get; set; }
         public int Mana { get; set; }
 
-        private Dictionary<int, Ability> abilities;
+        private Dictionary<int, Ability> abilities = new Dictionary<int, Ability>();
+        private List<Effect> effects = new List<Effect>();
 
         Personage()
         {
@@ -29,6 +30,11 @@ namespace Game
 
             // Ability ability = abilities[id];
             // AddResultOfAbility(ability.CalculateResult());
+        }
+
+        public void AddEffects(Effect effect)
+        {
+            effects.Add(effect);
         }
 
         public void AddAbility(Ability ability)
