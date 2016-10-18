@@ -8,9 +8,9 @@ namespace ProcessorGeneric
 {
     public static class ProcessorBuilder
     {
-        public static TEngine CreateEngine<TEngine>()
+        public static TEngine CreateEngine<TEngine>() where TEngine : new()
         {
-            throw new NotImplementedException();
+            return new TEngine();
         }
     }
 }

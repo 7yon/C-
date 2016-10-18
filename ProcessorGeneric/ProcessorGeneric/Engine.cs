@@ -8,9 +8,9 @@ namespace ProcessorGeneric
 {
     public class Engine
     {
-        public TEntity For<TEntity>()
+        public TEntity For<TEntity>() where TEntity : new()
         {
-            throw new NotImplementedException();
+            return new TEntity();
         }
     }
 }

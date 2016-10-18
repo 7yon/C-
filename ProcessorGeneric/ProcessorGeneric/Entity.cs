@@ -8,11 +8,11 @@ namespace ProcessorGeneric
 {
     public class Entity
     {
-        Engine engine;
+        private Engine engine;
 
         public Processor<Engine, Entity, Logger> With<TLogger>()
         {
-            throw new NotImplementedException();
+            return new Processor<Engine, Entity, Logger>();
         }
     }
 }
