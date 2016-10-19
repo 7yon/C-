@@ -16,8 +16,9 @@ namespace ProcessorGeneric
             StoreID.Create<MyLogger>();
             StoreID.Create<MyEngine>();
             StoreID.Create<MyEntity>();
+            StoreID.Create<MyEntity>();
 
-            var a = StoreID.Find<MyEntity>(2);
+            var a = StoreID.OutAllPair<MyEntity>();
         }
     }
 }

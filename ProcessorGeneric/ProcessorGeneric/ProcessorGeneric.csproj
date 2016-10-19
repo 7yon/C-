@@ -43,9 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Engine.cs" />
-    <Compile Include="Entity.cs" />
-    <Compile Include="Logger.cs" />
+    <Compile Include="EngineWrapper.cs" />
+    <Compile Include="EntityWrapper.cs" />
+    <Compile Include="MyClasses.cs" />
     <Compile Include="Processor.cs" />
     <Compile Include="ProcessorBuilder.cs" />
     <Compile Include="Program.cs" />

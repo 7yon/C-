@@ -37,21 +37,10 @@ namespace ProcessorGenericTests
             StoreID.Create<MyEngine>();
             StoreID.Create<MyEntity>();
 
-            var a = StoreID.Find<MyEntity>(9);
+            var a = StoreID.Find<MyEntity>(Guid.NewGuid());
 
             Assert.AreEqual(null, a);
         }
 
-        [TestMethod]
-        public void StoreID_TryGetObjectFromCorrectId_MustReturnCorreectObject()
-        {
-            StoreID.Create<MyLogger>();
-            StoreID.Create<MyEngine>();
-            StoreID.Create<MyEntity>();
-
-            var a = StoreID.Find<MyLogger>(0);
-
-            Assert.AreEqual(new MyLogger().GetType(), a.GetType());
-        }
     }
 }

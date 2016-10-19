@@ -8,8 +8,7 @@ namespace ProcessorGeneric
 {
     public static class StoreID
     {
-        private static List<Dictionary<int, object>> store = new List<Dictionary<int, object>>();
-        private static int currentId = 0;
+        private static List<Dictionary<Guid, object>> store = new List<Dictionary<Guid, object>>();
 
         public static TObject Create<TObject>() where TObject : new()
         {           
@@ -18,28 +17,27 @@ namespace ProcessorGeneric
 
             for (int i = 0; i < store.Count; i++)
             {
-                if (store[i].First().Value is TObject)
+                if (store[i].First().Value.GetType() == typeof(TObject))
                 {
-                    store[i].Add(currentId, currentObject);                 
+                    store[i].Add(Guid.NewGuid(), currentObject);                 
                     foundCurrentType = true;
                     break;
                 }
             }
 
             if (!foundCurrentType) { 
-                store.Add(new Dictionary<int, object>());
-                store[store.Count - 1].Add(currentId, currentObject);
+                store.Add(new Dictionary<Guid, object>());
+                store[store.Count - 1].Add(Guid.NewGuid(), currentObject);
             }
 
-            ++currentId;
             return currentObject;
         }
 
-        public static Dictionary<int, object> OutAllPair<TObject>()
+        public static Dictionary<Guid, object> OutAllPair<TObject>()
         {
             for (int i = 0; i < store.Count; i++)
             {
-                if (store[i].First().Value is TObject)
+                if (store[i].First().Value.GetType() == typeof(TObject))
                 {
                     return store[i];
                 }
@@ -47,16 +45,16 @@ namespace ProcessorGeneric
             return null;
         }
 
-        public static TObject Find<TObject>(int id)
+        public static Dictionary<Guid, object> Find<TObject>(Guid id)
         {
             for (int i = 0; i < store.Count; i++)
             {
-                if ((store[i].ContainsKey(id) && store[i][id] is TObject)) 
+                if ((store[i].ContainsKey(id) && store[i][id].GetType() == typeof(TObject)))
                 {
-                    return (TObject)store[i][id];                  
+                    return store[i];                  
                 }
             }
-            return default(TObject);
+            return default(Dictionary<Guid, object>);
         }
     }
 }
