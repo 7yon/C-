@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProcessorGeneric
 {
-    public class Entity <TEngine, TEntity>
+    public class EntityWrapper <TEngine, TEntity>
     {
         public Processor<TEngine, TEntity, TLogger> With<TLogger>()
         {

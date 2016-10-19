@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ProcessorGeneric
 {
-    public class Engine <TEngine>
+    public class EngineWrapper <TEngine>
     {
-        public Entity<TEngine, TEntity> For<TEntity>() where TEntity : new()
+        public EntityWrapper<TEngine, TEntity> For<TEntity>() where TEntity : new()
         {
-            return new Entity<TEngine, TEntity>();
+            return new EntityWrapper<TEngine, TEntity>();
         }
     }
 }
