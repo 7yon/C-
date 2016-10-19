@@ -6,7 +6,18 @@ using System.Threading.Tasks;
 
 namespace ProcessorGeneric
 {
-    public class Logger
+    public class MyLogger
     {
+
+    }
+
+    public class MyEngine
+    {
+
+    }
+
+    public class MyEntity
+    {
+
     }
 }

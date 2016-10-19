@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProcessorGeneric;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,13 @@ namespace ProcessorGeneric
     {
         static void Main(string[] args)
         {
-            var processor = ProcessorBuilder.CreateEngine<Engine>().For<Entity>().With<Logger>();
+            var processor = ProcessorBuilder.CreateEngine<MyEngine>().For<MyEntity>().With<MyLogger>();
+
+            StoreID.Create<MyLogger>();
+            StoreID.Create<MyEngine>();
+            StoreID.Create<MyEntity>();
+
+            var a = StoreID.Find<MyEntity>(2);
         }
     }
 }

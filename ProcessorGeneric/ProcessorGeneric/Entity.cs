@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace ProcessorGeneric
 {
-    public class Entity
+    public class Entity <TEngine, TEntity>
     {
-        private Engine engine;
-
-        public Processor<Engine, Entity, Logger> With<TLogger>()
+        public Processor<TEngine, TEntity, TLogger> With<TLogger>()
         {
-            return new Processor<Engine, Entity, Logger>();
+            return new Processor<TEngine, TEntity, TLogger>();
         }
     }
 }

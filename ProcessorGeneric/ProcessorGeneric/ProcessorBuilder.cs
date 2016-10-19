@@ -8,9 +8,9 @@ namespace ProcessorGeneric
 {
     public static class ProcessorBuilder
     {
-        public static TEngine CreateEngine<TEngine>() where TEngine : new()
-        {
-            return new TEngine();
+        public static Engine<TEngine> CreateEngine<TEngine>() where TEngine : new()
+        {           
+            return new Engine<TEngine>();          
         }
     }
 }
