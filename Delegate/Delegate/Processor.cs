@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace Delegate
 {
-    public class TransactionProcessor
+    public class Processor<TObject, TObjectRequest>
     {
-        private Func<TransactionRequest, bool> Check;
-        private Func<TransactionRequest, Transaction> Register;
-        private Action<Transaction> Save;
+        private Func<TObjectRequest, bool> Check;
+        private Func<TObjectRequest, TObject> Register;
+        private Action<TObject> Save;
 
-        public TransactionProcessor(Func<TransactionRequest, bool> Check, Func<TransactionRequest, Transaction> Register, Action<Transaction> Save)
+        public Processor(Func<TObjectRequest, bool> Check, Func<TObjectRequest, TObject> Register, Action<TObject> Save)
         {
             this.Check = Check;
             this.Register = Register;
             this.Save = Save;
         }
 
-        public Transaction Process(TransactionRequest request)
+        public TObject Process(TObjectRequest request)
         {
             if (!Check(request))
                 throw new ArgumentException();
