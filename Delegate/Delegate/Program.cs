@@ -12,7 +12,7 @@ namespace Delegate
         {
             Table table = new Table();
 
-            LoggingSystem system = new LoggingSystem(table);
+            LoggingSystem system = new LoggingSystem(table.TableValues);
 
             table.InsertRow(0);
             table.InsertColumn(0);       
