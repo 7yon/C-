@@ -8,18 +8,17 @@ namespace Delegate
 {
     public class Program
     {
-        static void main()
+        static void Main(string[] args)
         {
             Table table = new Table();
 
             LoggingSystem system = new LoggingSystem(table);
 
             table.InsertRow(0);
-            table.InsertColumn(0);
-            table.Put(0, 0, 1);
+            table.InsertColumn(0);       
 
             table.AddObserver(system);
-            table.NotifyObservers();
+            table.Put(0, 0, 1);
         }
     }
 }

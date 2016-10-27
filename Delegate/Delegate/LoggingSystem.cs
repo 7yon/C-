@@ -8,14 +8,14 @@ namespace Delegate
 {
     public class LoggingSystem : IObserver
     {
-        private Table table = new Table();
+        private List<List<int>> table = new List<List<int>>();
 
-        public LoggingSystem(Table table)
+        public LoggingSystem(List<List<int>> table)
         {
             this.table = table;
         }
 
-        public void Update(Table table)
+        public void Update(List<List<int>> table)
         {
             this.table = table;
         }

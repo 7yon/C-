@@ -6,35 +6,39 @@ using System.Threading.Tasks;
 
 namespace Delegate
 {
-    public class Table : IObservable
+    public class Table
     {
-        private List<List<int>> table = new List<List<int>>();
+        public List<List<int>> TableValues { get; private set; }
         private List<IObserver> observers = new List<IObserver>();
 
-        // Если необходимо, то после каждого изменения можно вызвать NotifyObservers()
-
+        public Table()
+        {
+            TableValues = new List<List<int>>();           
+        }
         public void Put(int row, int column, int value)
         {
-            table[row][column] = value;
+            TableValues[row][column] = value;
+            NotifyObservers();
         }
 
         public void InsertRow(int rowIndex)
         {
-            table.Insert(rowIndex, new List<int>());
-
+            TableValues.Insert(rowIndex, new List<int>());
+            NotifyObservers();
         }
 
         public void InsertColumn(int columnIndex)
         {
-            for(int i = 0; i < table.Count; i++)
+            for(int i = 0; i < TableValues.Count; i++)
             {
-                table[i].Insert(columnIndex, default(int));
+                TableValues[i].Insert(columnIndex, default(int));
             }
+            NotifyObservers();
         }
 
         public int Get(int row, int column)
         {
-            return table[row][column];
+            return TableValues[row][column];
         }
 
         public void AddObserver(IObserver observer)
@@ -47,11 +51,11 @@ namespace Delegate
             observers.Remove(observer);
         }
 
-        public void NotifyObservers()
+        private void NotifyObservers()
         {
             foreach (IObserver o in observers)
             {
-                o.Update(this);
+                o.Update(TableValues);
             }
         }
     }

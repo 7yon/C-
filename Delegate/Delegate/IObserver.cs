@@ -8,6 +8,6 @@ namespace Delegate
 {
     public interface IObserver
     {
-        void Update(Table table);
+        void Update(List<List<int>> table);
     }
 }
