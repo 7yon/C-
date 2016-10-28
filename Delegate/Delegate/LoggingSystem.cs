@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,14 +9,14 @@ namespace Delegate
 {
     public class LoggingSystem : IObserver
     {
-        private List<List<int>> table = new List<List<int>>();
+        private IReadOnlyList<IReadOnlyList<int>> table;
 
-        public LoggingSystem(List<List<int>> table)
+        public LoggingSystem(IReadOnlyList<IReadOnlyList<int>> table)
         {
             this.table = table;
         }
 
-        public void Update(List<List<int>> table)
+        public void Update(IReadOnlyList<IReadOnlyList<int>> table)
         {
             this.table = table;
         }
