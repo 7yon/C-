@@ -30,28 +30,22 @@ namespace Application
             }
 
             Type pluginType = typeof(IPlugin);
-            ICollection<Type> pluginTypes = new List<Type>();
+            List<IPlugin> plugins = new List<IPlugin>();
 
             foreach (Assembly assembly in assemblies)
             {
                 if (assembly != null)
                 {
                     Type[] types = assembly.GetTypes();
-                    foreach (Type type in types)
-                    {
-                        if (type.IsInterface || type.IsAbstract)
-                        {
-                            continue;
-                        }
-                        else
-                        {
-                            if (type.GetInterface(pluginType.FullName) != null)
-                            {
-                                Console.WriteLine(type.Name);
-                                pluginTypes.Add(type);
-                            }
-                        }
-                    }
+
+                    var list = from type in types
+                                      where type.IsInterface != true 
+                                      && type.IsAbstract != true
+                                      && type.GetInterface(pluginType.FullName) != null
+                                      && type.GetConstructor(Type.EmptyTypes) != null
+                                      select (IPlugin)Activator.CreateInstance(type);
+
+                    plugins.AddRange(list);            
                 }
             }
         }

@@ -9,6 +9,16 @@ namespace Plugin2
 {
     public class PluginClass2 : IPlugin
     {
-        public string Name { get; set; }
+        public string Name
+        {
+            get
+            {
+                return "PluginClass2";
+            }
+            private set
+            {
+                Name = value;
+            }
+        }
     }
 }
