@@ -27,8 +27,8 @@ namespace Application
                         if ((type.GetConstructor(Type.EmptyTypes) != null) && (!type.IsInterface)
                             && (!type.IsAbstract) && (type.GetInterface(pluginType.FullName) != null))
                         {
-                            var instanceOfMyType = Activator.CreateInstance(type);
-                            Console.WriteLine(instanceOfMyType.GetType().GetProperty("Name").GetValue(instanceOfMyType));
+                            var instanceOfMyType = Activator.CreateInstance(type) as IPlugin;
+                            Console.WriteLine(instanceOfMyType.Name);
                         }
                     }
                 }
