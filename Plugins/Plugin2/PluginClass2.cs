@@ -15,10 +15,6 @@ namespace Plugin2
             {
                 return "PluginClass2";
             }
-            private set
-            {
-                Name = value;
-            }
         }
     }
 }

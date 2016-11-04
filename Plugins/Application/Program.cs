@@ -14,40 +14,27 @@ namespace Application
         static void Main(string[] args)
         {
             string directory = "D:\\C_SharpCourse\\Plugins\\DLL";
-            string[] dllFileNames = null;
+
+            Type pluginType = typeof(IPlugin);
 
             if (Directory.Exists(directory))
             {
-                dllFileNames = Directory.GetFiles(directory, "*.dll");
-            }
-
-            ICollection<Assembly> assemblies = new List<Assembly>(dllFileNames.Length);
-            foreach (string dllFile in dllFileNames)
-            {
-                AssemblyName an = AssemblyName.GetAssemblyName(dllFile);
-                Assembly assembly = Assembly.Load(an);
-                assemblies.Add(assembly);
-            }
-
-            Type pluginType = typeof(IPlugin);
-            List<IPlugin> plugins = new List<IPlugin>();
-
-            foreach (Assembly assembly in assemblies)
-            {
-                if (assembly != null)
+                foreach(string dllFile in Directory.GetFiles(directory, "*.dll"))
                 {
-                    Type[] types = assembly.GetTypes();
-
-                    var list = from type in types
-                                      where type.IsInterface != true 
-                                      && type.IsAbstract != true
-                                      && type.GetInterface(pluginType.FullName) != null
-                                      && type.GetConstructor(Type.EmptyTypes) != null
-                                      select (IPlugin)Activator.CreateInstance(type);
-
-                    plugins.AddRange(list);            
+                    Type[] types = Assembly.LoadFile(dllFile).GetTypes();                   
+                    foreach (Type type in types)
+                    {
+                        if ((type.GetConstructor(Type.EmptyTypes) != null) && (!type.IsInterface)
+                            && (!type.IsAbstract) && (type.GetInterface(pluginType.FullName) != null))
+                        {
+                            Console.WriteLine(type.Name);
+                            object instanceOfMyType = Activator.CreateInstance(type) as IPlugin;
+                        }
+                    }
                 }
             }
+
+            Console.ReadLine();
         }
     }
 }
