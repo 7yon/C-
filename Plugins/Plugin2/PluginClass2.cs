@@ -9,6 +9,7 @@ namespace Plugin2
 {
     public class PluginClass2 : IPlugin
     {
+        public PluginClass2() { }
         public string Name
         {
             get

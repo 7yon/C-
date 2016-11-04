@@ -13,7 +13,7 @@ namespace Application
     {
         static void Main(string[] args)
         {
-            string directory = "D:\\C_SharpCourse\\Plugins\\DLL";
+            string directory = "D:\\C_Sharp\\Plugins\\DLL";
 
             Type pluginType = typeof(IPlugin);
 
@@ -27,8 +27,8 @@ namespace Application
                         if ((type.GetConstructor(Type.EmptyTypes) != null) && (!type.IsInterface)
                             && (!type.IsAbstract) && (type.GetInterface(pluginType.FullName) != null))
                         {
-                            Console.WriteLine(type.Name);
-                            object instanceOfMyType = Activator.CreateInstance(type) as IPlugin;
+                            var instanceOfMyType = Activator.CreateInstance(type);
+                            Console.WriteLine(instanceOfMyType.GetType().GetProperty("Name").GetValue(instanceOfMyType));
                         }
                     }
                 }
