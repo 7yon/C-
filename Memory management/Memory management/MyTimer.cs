@@ -8,6 +8,7 @@ namespace Memory_management
     public class MyTimer : IDisposable
     {
         Stopwatch timer = new Stopwatch();
+        bool isDispose = false;
         public long ElapsedMilliseconds
         {
             get
@@ -28,9 +29,12 @@ namespace Memory_management
 
         protected virtual void Dispose(bool fromDisposeMethod)
         {
-            if (fromDisposeMethod)
+            if (!isDispose)
             {
-                timer.Stop();
+                if (fromDisposeMethod)
+                {
+                    timer.Stop();
+                }
             }
         }
 
@@ -38,6 +42,15 @@ namespace Memory_management
         {
             timer.Reset();
             timer.Start();
+            isDispose = false;
+
+            return this;
+        }
+
+        public IDisposable Stop()
+        {
+            timer.Stop();
+            isDispose = true;
 
             return this;
         }

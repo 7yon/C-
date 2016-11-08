@@ -14,6 +14,8 @@ namespace Memory_management
                 {
 
                 }
+
+                timer.Stop();
             }
             Console.WriteLine("after start " + timer.ElapsedMilliseconds);
 
