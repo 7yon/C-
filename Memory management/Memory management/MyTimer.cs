@@ -20,6 +20,11 @@ namespace Memory_management
         {
         }
 
+        ~MyTimer()
+        {
+            Dispose(false);
+        }
+
         public void Dispose()
         {
             Dispose(true);
@@ -38,13 +43,6 @@ namespace Memory_management
         public MyTimer Start()
         {
             timer.Restart();
-
-            return this;
-        }
-
-        public MyTimer Stop()
-        {
-            timer.Stop();
 
             return this;
         }

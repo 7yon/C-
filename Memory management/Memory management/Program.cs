@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Timers;
+using System.Drawing;
 
 namespace Memory_management
 {
@@ -8,30 +9,34 @@ namespace Memory_management
         static void Main(string[] args)
         {
             var timer = new MyTimer();
+            var bitmap = (Bitmap)Bitmap.FromFile("img.jpg");
+
+            using (timer.Start())
+            {             
+                using (var bitmapEditor = new BitmapEditor(bitmap))
+                {
+                    for(int x = 0; x < bitmap.Width; x++)
+                    {
+                        for(int y = 0; y < bitmap.Height; y++)
+                        {
+                            bitmapEditor.SetPixel(x, y, 0, 0, 0);
+                        }
+                    }
+                }
+            }
+            Console.WriteLine("bitmapEditor: " + timer.ElapsedMilliseconds);
+
             using (timer.Start())
             {
-                for(int i = 0; i < 1000000; i++)
+                for (int x = 0; x < bitmap.Width; x++)
                 {
-
-                }
-
-                timer.Stop();
-            }
-            Console.WriteLine("after start " + timer.ElapsedMilliseconds);
-
-            using (timer.Continue())
-            {
-                for (int i = 0; i < 2; i++)
-                {
-                    for(int y = 0; y < 20000000; y++)
+                    for (int y = 0; y < bitmap.Height; y++)
                     {
-
+                        bitmap.SetPixel(x, y, Color.Black);
                     }
-                    Console.WriteLine("i - "+ i.ToString() + " " + timer.ElapsedMilliseconds);
-                }
+                }         
             }
-            Console.WriteLine("after continue " + timer.ElapsedMilliseconds);
-
+            Console.WriteLine("bitmap: " + timer.ElapsedMilliseconds);
         }
     }
 }
