@@ -80,10 +80,70 @@ namespace Files
                                         currentValue = Convert.ToDouble(values[i].Replace('.', ','));
                                 }
                                                                
-                                myObjectType.GetProperty(fields[i]).SetValue(myObject, currentValue);
-                                yield return myObject;
-                            }
+                                myObjectType.GetProperty(fields[i]).SetValue(myObject, currentValue);                               
+                            }                       
                         }
+                        yield return myObject;
+                    }
+                }
+        }
+
+        static IEnumerable<Dictionary<string, object>> ReadCsv3()
+        {
+            bool firstString = true;
+            string[] fields = null;
+
+            using (var reader = new StreamReader(File.OpenRead("D:\\C_Sharp\\Files\\Files\\airquality.csv")))
+
+                while (true)
+                {
+                    var str = reader.ReadLine();
+                    if (str == null)
+                    {
+                        yield break;
+                    }
+
+                    var values = str.Split(',');
+
+                    if (firstString)
+                    {
+                        fields = values;
+                        firstString = false;
+                    }
+                    else
+                    {
+                        Dictionary<string, object> myDictionary = new Dictionary<string, object>();
+
+                        MyObject myObject = new MyObject();
+                        Type myObjectType = typeof(MyObject);
+
+                        for (int i = 0; i < values.Length; i++)
+                        {
+                            PropertyInfo currentInfo = myObjectType.GetProperty(fields[i]);
+
+                            if ((values[i] == "NA") && ((fields[i] == "Name") || (fields[i] == "Wind") || (fields[i] == "Temp") || (fields[i] == "Month") || (fields[i] == "Day")))
+                            {
+                                throw new ArgumentException("Поле " + fields[i] + " не может быть null!");
+                            }
+                            else
+                            {
+                                object currentValue = null;
+                                Type currentType = currentInfo.PropertyType;
+
+                                if (values[i] != "NA")
+                                {
+                                    if (currentType == typeof(int) || (currentType == typeof(int?)))
+                                        currentValue = Convert.ToInt32(values[i]);
+                                    if (currentType == typeof(double) || (currentType == typeof(double?)))
+                                        currentValue = Convert.ToDouble(values[i].Replace('.', ','));
+                                    if (currentType == typeof(string))
+                                        currentValue = values[i];
+                                }
+
+                                myDictionary.Add(fields[i], currentValue);                               
+                            }                           
+                        }
+                        yield return myDictionary;
                     }
                 }
         }
