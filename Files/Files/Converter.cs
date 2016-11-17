@@ -20,5 +20,14 @@ namespace Files
             else
                 return default(T);
         }
+
+        public static dynamic SimpleConvert(Type currentType, string value)
+        {
+            var currentValue = typeof(Converter)
+                                        .GetMethod("Convert")
+                                        .MakeGenericMethod(new[] { currentType })
+                                        .Invoke(null, new[] { value.Replace('.', ',') });
+            return currentValue;
+        }
     }
 }

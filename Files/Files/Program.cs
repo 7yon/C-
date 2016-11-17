@@ -69,10 +69,7 @@ namespace Files
                         {
                             Type currentType = properties[i].PropertyType;
 
-                            var currentValue = typeof(Converter)
-                                        .GetMethod("Convert")
-                                        .MakeGenericMethod(new[] { currentType })
-                                        .Invoke(null, new[] { values[index].Replace('.', ',') });
+                            var currentValue = Converter.SimpleConvert(currentType, values[index]);
 
                             myObjectType.GetProperty(currentProperty).SetValue(myObject, currentValue);
                         }
@@ -124,7 +121,7 @@ namespace Files
             //    Console.WriteLine(value);
             //}
                 
-            foreach (var value in ReadCsv3())
+            foreach (var value in ReadCsv2<MyObject>())
             {
             }
         }
