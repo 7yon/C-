@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -114,6 +115,49 @@ namespace Files
             }
         }
 
+        static List<dynamic> ReadCsv4()
+        {
+            Type[] types = new Type[] { typeof(string), typeof(int?), typeof(int?), typeof(double), typeof(int), typeof(int), typeof(int) };
+            List<dynamic> list = new List<dynamic>();
+
+            bool firstString = true;
+            List<string> fields = null;
+
+            foreach (string[] values in ReadCsv1())
+            {
+                if (firstString)
+                {
+                    fields = new List<string>(values);
+                    firstString = false;
+                }
+                else
+                {
+                    dynamic myObject = new ExpandoObject();
+                    for (int i = 0; i < values.Length; i++)
+                    {
+                        try
+                        {
+                            if((values[i] == null) && ((types[i] == typeof(int?) || ((types[i] == typeof(double?))))))
+                            {
+                                ((IDictionary<string, object>)myObject).Add(fields[i], null);
+                            }
+                            else
+                            {
+                                var value = TypeDescriptor.GetConverter(types[i]).ConvertFrom(values[i].Replace('.', ','));
+                                ((IDictionary<string, object>)myObject).Add(fields[i], value);
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            throw new ArgumentException("Поле " + fields[i] + " не может быть null!");
+                        }
+                    }
+                    list.Add(myObject);                                     
+                }
+            }
+            return list;
+        }
+
         static void Main(string[] args)
         {
             //foreach (var value in ReadCsv1())
@@ -121,9 +165,11 @@ namespace Files
             //    Console.WriteLine(value);
             //}
                 
-            foreach (var value in ReadCsv2<MyObject>())
+            //foreach (var value in ReadCsv2<MyObject>())
             {
             }
+
+            var list = ReadCsv4().Where(z => z.Ozone > 10).Select(z => z.Wind);
         }
     }
 }
