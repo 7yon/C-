@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -84,48 +85,31 @@ namespace Files
         static IEnumerable<Dictionary<string, object>> ReadCsv3()
         {
             bool firstString = true;
-            List<string> fields = null;
+
+            Type[] types = new Type[] {typeof(string), typeof(int?), typeof(int?), typeof(double), typeof(int), typeof(int), typeof(int) };
+            string[] columnsName = null;
 
             foreach (string[] values in ReadCsv1())
             {
                 if (firstString)
                 {
-                    fields = new List<string>(values);
                     firstString = false;
+                    columnsName = values.ToArray();
                 }
                 else
                 {                 
                     Dictionary<string, object> myDictionary = new Dictionary<string, object>();
 
-                    MyObject myObject = new MyObject();
-                    Type myObjectType = typeof(MyObject);
-                    PropertyInfo[] properties = myObjectType.GetProperties();
-
-                    for (int i = 0; i < properties.Length; i++)
+                    for (int i = 0; i < values.Length; i++)
                     {
-                        string currentProperty = properties[i].Name;
-
-                        int index;
-                        for (index = 0; index < fields.Count; index++)
+                        try
                         {
-                            if (fields[index] == currentProperty)
-                                break;
+                            var value = TypeDescriptor.GetConverter(types[i]).ConvertFrom(values[i].Replace('.', ','));
+                            myDictionary.Add(columnsName[i], value);
                         }
-
-                        if ((values[index] == null) && ((properties[i].PropertyType == typeof(int)) || (properties[i].GetType() == typeof(double))))
+                        catch (Exception e)
                         {
-                            throw new ArgumentException("Поле " + fields[i] + " не может быть null!");
-                        }
-                        else
-                        {
-                            Type currentType = properties[i].PropertyType;
-                           
-                            var currentValue = typeof(Converter)
-                                        .GetMethod("Convert")
-                                        .MakeGenericMethod(new[] { currentType })
-                                        .Invoke(null, new[] { values[index].Replace('.', ',') });
-
-                            myDictionary.Add(currentProperty, currentValue);
+                            throw new ArgumentException("Поле " + columnsName[i] + " не может быть null!");
                         }
                     }
                     yield return myDictionary;                   
