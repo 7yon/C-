@@ -10,6 +10,23 @@ namespace Files
 {
     class Program
     {
+
+        static object ConvertToObject(Type type, string value)
+        {
+            object currentValue = null;
+
+            if (value != null)
+            {
+                if (type == typeof(int) || (type == typeof(int?)))
+                    currentValue = Convert.ToInt32(value);
+                if (type == typeof(double) || (type == typeof(double?)))
+                    currentValue = Convert.ToDouble(value.Replace('.', ','));
+                if (type == typeof(string))
+                    currentValue = value;
+            }
+            return currentValue;
+        }
+
         static IEnumerable<string> ReadCsv1()
         {
             using (var reader = new StreamReader(File.OpenRead("D:\\C_Sharp\\Files\\Files\\airquality.csv")))
@@ -35,65 +52,141 @@ namespace Files
         static IEnumerable<T> ReadCsv2<T>() where T : new()
         {
             bool firstString = true;
-            string[] fields = null;
+            List<string> fields = null;
+            List<string> currentString = new List<string>();
 
-            using (var reader = new StreamReader(File.OpenRead("D:\\C_Sharp\\Files\\Files\\airquality.csv")))          
-
-                while (true)
+            int column = 0;
+            foreach (string value in ReadCsv1())
+            {
+                if (currentString.Count != 7)
                 {
-                    var str = reader.ReadLine();
-                    if (str == null)
-                    {
-                        yield break;
-                    }
-
-                    var values = str.Split(',');
+                    currentString.Add(value);
+                    column++;                 
+                }
+                else
+                {
+                    column = 0;
 
                     if (firstString)
                     {
-                        fields = values;
+                        fields = new List<string>(currentString);
                         firstString = false;
+
+                        currentString.Clear();
+                        currentString.Add(value);                    
                     }
                     else
                     {
                         T myObject = new T();
                         Type myObjectType = typeof(T);
+                        PropertyInfo[] properties = myObjectType.GetProperties();
 
-                        for (int i = 0; i < values.Length; i++)
-                        {                           
-                            PropertyInfo currentInfo = myObjectType.GetProperty(fields[i]);
+                        for (int i = 0; i < properties.Length; i++)
+                        {
+                            string currentProperty = properties[i].Name;
 
-                            if((values[i] == "NA") && ((fields[i] == "Name") || (fields[i] == "Wind") || (fields[i] == "Temp") || (fields[i] == "Month") || (fields[i] == "Day")))
+                            int index;
+                            for (index = 0; index < fields.Count; index++)
+                            {
+                                if (fields[index] == currentProperty)
+                                    break;
+                            }
+         
+                            if ((currentString[index] == null) && ((properties[i].PropertyType == typeof(int)) || (properties[i].GetType() == typeof(double))))
                             {
                                 throw new ArgumentException("Поле " + fields[i] + " не может быть null!");
                             }
                             else
                             {
                                 object currentValue = null;
-                                Type currentType = currentInfo.PropertyType;
+                                Type currentType = properties[i].PropertyType;
 
-                                if (values[i] != "NA")
-                                {
-                                    if (currentType == typeof(int) || (currentType == typeof(int?)))
-                                        currentValue = Convert.ToInt32(values[i]);
-                                    if (currentType == typeof(double) || (currentType == typeof(double?)))
-                                        currentValue = Convert.ToDouble(values[i].Replace('.', ','));
-                                }
-                                                               
-                                myObjectType.GetProperty(fields[i]).SetValue(myObject, currentValue);                               
-                            }                       
+                                currentValue = ConvertToObject(currentType, currentString[i]);
+
+                                myObjectType.GetProperty(currentProperty).SetValue(myObject, currentValue);
+                            }
                         }
+                        currentString.Clear();
+                        currentString.Add(value);
                         yield return myObject;
-                    }
-                }
+                    }                    
+                }                            
+            }
         }
 
         static IEnumerable<Dictionary<string, object>> ReadCsv3()
         {
             bool firstString = true;
+            List<string> fields = null;
+            List<string> currentString = new List<string>();
+
+            int column = 0;
+            foreach (string value in ReadCsv1())
+            {
+                if (currentString.Count != 7)
+                {
+                    currentString.Add(value);
+                    column++;
+                }
+                else
+                {
+                    column = 0;
+
+                    if (firstString)
+                    {
+                        fields = new List<string>(currentString);
+                        firstString = false;
+
+                        currentString.Clear();
+                        currentString.Add(value);
+                    }
+                    else
+                    {
+                        Dictionary<string, object> myDictionary = new Dictionary<string, object>();
+
+                        MyObject myObject = new MyObject();
+                        Type myObjectType = typeof(MyObject);
+                        PropertyInfo[] properties = myObjectType.GetProperties();
+
+                        for (int i = 0; i < properties.Length; i++)
+                        {
+                            string currentProperty = properties[i].Name;
+
+                            int index;
+                            for (index = 0; index < fields.Count; index++)
+                            {
+                                if (fields[index] == currentProperty)
+                                    break;
+                            }
+
+                            if ((currentString[index] == null) && ((properties[i].PropertyType == typeof(int)) || (properties[i].GetType() == typeof(double))))
+                            {
+                                throw new ArgumentException("Поле " + fields[i] + " не может быть null!");
+                            }
+                            else
+                            {
+                                object currentValue = null;
+                                Type currentType = properties[i].PropertyType;
+
+                                currentValue = ConvertToObject(currentType, currentString[i]);
+                                
+                                myDictionary.Add(currentProperty, currentValue);
+                            }
+                        }
+                        currentString.Clear();
+                        currentString.Add(value);
+                        yield return myDictionary;
+                    }
+                }
+            }
+        }
+
+        static IEnumerable<LinkedList<MyObject>> ReadCsv4(string filename)
+        {
+            bool firstString = true;
             string[] fields = null;
 
-            using (var reader = new StreamReader(File.OpenRead("D:\\C_Sharp\\Files\\Files\\airquality.csv")))
+            using (var reader = new StreamReader(File.OpenRead(filename)))
 
                 while (true)
                 {
@@ -112,7 +205,7 @@ namespace Files
                     }
                     else
                     {
-                        Dictionary<string, object> myDictionary = new Dictionary<string, object>();
+                        LinkedList<MyObject> myDictionary = new LinkedList<MyObject>();
 
                         MyObject myObject = new MyObject();
                         Type myObjectType = typeof(MyObject);
@@ -130,18 +223,10 @@ namespace Files
                                 object currentValue = null;
                                 Type currentType = currentInfo.PropertyType;
 
-                                if (values[i] != "NA")
-                                {
-                                    if (currentType == typeof(int) || (currentType == typeof(int?)))
-                                        currentValue = Convert.ToInt32(values[i]);
-                                    if (currentType == typeof(double) || (currentType == typeof(double?)))
-                                        currentValue = Convert.ToDouble(values[i].Replace('.', ','));
-                                    if (currentType == typeof(string))
-                                        currentValue = values[i];
-                                }
+                                currentValue = ConvertToObject(currentType, values[i]);
 
-                                myDictionary.Add(fields[i], currentValue);                               
-                            }                           
+                                //myDictionary.Add(fields[i], currentValue);
+                            }
                         }
                         yield return myDictionary;
                     }
@@ -150,8 +235,11 @@ namespace Files
 
         static void Main(string[] args)
         {
-            foreach (var value in ReadCsv1())
-                Console.WriteLine(value);
+            //foreach (var value in ReadCsv1())
+                //Console.WriteLine(value);
+            foreach (var value in ReadCsv3()) { }
+                //Console.WriteLine(value.Name);
+
         }
     }
 }
