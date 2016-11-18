@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Dynamic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -14,6 +15,7 @@ namespace Files
     {     
         static IEnumerable<string[]> ReadCsv1()
         {
+            bool firstString = true;
             using (var reader = new StreamReader(File.OpenRead("D:\\C_Sharp\\Files\\Files\\airquality.csv")))
                 while (true)
                 {
@@ -23,12 +25,22 @@ namespace Files
                         yield break;
                     }
 
-                    var values = str.Split(',');
-                    for(int i=0; i < values.Length; i++)
+                    var values = str.Split(',');                   
+
+                    for (int i=0; i < values.Length; i++)
                     {
+                        values[i] = values[i].Trim('"');
+
+                        if (firstString)
+                        {
+                            values[i] = values[i].Replace(".", "");                            
+                        }
+                        
                         if (values[i] == "NA")
                             values[i] = null;
                     }
+                    firstString = false;
+
                     yield return values;
                 }
         }
@@ -69,8 +81,7 @@ namespace Files
                         else
                         {
                             Type currentType = properties[i].PropertyType;
-
-                            var currentValue = Converter.SimpleConvert(currentType, values[index]);
+                            var currentValue = Converter.Convert(currentType, values[index]);
 
                             myObjectType.GetProperty(currentProperty).SetValue(myObject, currentValue);
                         }
@@ -83,9 +94,9 @@ namespace Files
         static IEnumerable<Dictionary<string, object>> ReadCsv3()
         {
             bool firstString = true;
-
-            Type[] types = new Type[] {typeof(string), typeof(int?), typeof(int?), typeof(double), typeof(int), typeof(int), typeof(int) };
             string[] columnsName = null;
+
+            Type[] types = new Type[] { typeof(double), typeof(int), typeof(string)};            
 
             foreach (string[] values in ReadCsv1())
             {
@@ -102,8 +113,32 @@ namespace Files
                     {
                         try
                         {
-                            var value = TypeDescriptor.GetConverter(types[i]).ConvertFrom(values[i].Replace('.', ','));
-                            myDictionary.Add(columnsName[i], value);
+                            if (((columnsName[i] != "Ozone") && (columnsName[i] != "SolarR")) && (values[i] == null))
+                                throw new Exception();
+
+                            object value = null;
+
+                            if (values[i] != null)
+                            {
+                                for (int j = 0; j < types.Length; j++)
+                                {
+                                    try
+                                    {
+                                        value = Converter.Convert(types[j], values[i]);
+                                        break;
+                                    }
+                                    catch (Exception e) { }                                   
+                                }  
+
+                                char a = Convert.ToChar(CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
+
+                                if ((!value.ToString().Contains(a)) && (value.GetType() == typeof(double)))
+                                    myDictionary.Add(columnsName[i], Convert.ToInt32(value));
+                                else
+                                    myDictionary.Add(columnsName[i], value);                                                                                                
+                            }
+                            else
+                                myDictionary.Add(columnsName[i], value);
                         }
                         catch (Exception e)
                         {
@@ -117,7 +152,7 @@ namespace Files
 
         static List<dynamic> ReadCsv4()
         {
-            Type[] types = new Type[] { typeof(string), typeof(int?), typeof(int?), typeof(double), typeof(int), typeof(int), typeof(int) };
+            Type[] types = new Type[] { typeof(double), typeof(int), typeof(string) };
             List<dynamic> list = new List<dynamic>();
 
             bool firstString = true;
@@ -137,15 +172,34 @@ namespace Files
                     {
                         try
                         {
-                            if((values[i] == null) && ((types[i] == typeof(int?) || ((types[i] == typeof(double?))))))
+                            if (((fields[i] != "Ozone") && (fields[i] != "SolarR")) && (values[i] == null))
+                                throw new Exception();
+
+                            object value = null;
+
+                            if (values[i] != null)
                             {
-                                ((IDictionary<string, object>)myObject).Add(fields[i], null);
+                                for (int j = 0; j < types.Length; j++)
+                                {
+                                    try
+                                    {
+                                        value = Converter.Convert(types[j], values[i]);
+                                        break;
+                                    }
+                                    catch (Exception e)
+                                    {
+
+                                    }
+                                }
+                                char a = Convert.ToChar(CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator);
+
+                                if ((!value.ToString().Contains(a)) && (value.GetType() == typeof(double)))
+                                    ((IDictionary<string, object>)myObject).Add(fields[i], Convert.ToInt32(value));
+                                else
+                                    ((IDictionary<string, object>)myObject).Add(fields[i], value);
                             }
                             else
-                            {
-                                var value = TypeDescriptor.GetConverter(types[i]).ConvertFrom(values[i].Replace('.', ','));
                                 ((IDictionary<string, object>)myObject).Add(fields[i], value);
-                            }
                         }
                         catch (Exception e)
                         {
@@ -160,12 +214,12 @@ namespace Files
 
         static void Main(string[] args)
         {
-            //foreach (var value in ReadCsv1())
-            //{
-            //    Console.WriteLine(value);
-            //}
+            foreach (var value in ReadCsv1())
+            {
+                Console.WriteLine(value);
+            }
                 
-            //foreach (var value in ReadCsv2<MyObject>())
+            foreach (var value in ReadCsv3())
             {
             }
 
